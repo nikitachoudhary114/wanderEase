@@ -4,9 +4,15 @@ const port = 8080;
 const mongoose = require("mongoose");
 const Listing = require("./model/listing");
 const methodOverride = require("method-override");
+const ejsMate = require("ejs-mate");
+const path = require("path");
 
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
+app.engine("ejs", ejsMate);
+app.use(express.static(path.join(__dirname, "/public")))
 
 main()
     .then(() => {
@@ -27,12 +33,12 @@ app.get("/", (req, res) => {
 app.get("/listings", async (req, res) => {
     let listings = await Listing.find({});
     // console.log(listings);
-    res.render("index.ejs", { listings });
+    res.render("listings/index.ejs", { listings });
 })
 
 //new  listing
 app.get("/listings/new", (req, res) => {
-    res.render("new.ejs");
+    res.render("listings/new.ejs");
 })
 
 //new listing data
@@ -48,14 +54,14 @@ app.post("/listings", async (req, res) => {
 app.get("/listings/:id", async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
-    res.render("show.ejs", { listing });
+    res.render("listings/show.ejs", { listing });
 })
 
 //edit lisiting
 app.get("/listings/:id/edit", async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
-    res.render("edit.ejs", { listing });
+    res.render("listings/edit.ejs", { listing });
 });
 
 //patch edit data

@@ -1,0 +1,38 @@
+<%- layout("/layouts/boilerplate") %>
+
+    <body>
+        <div class="col-8 offset-2 mt-5">
+            <h3>Edit listing</h3>
+            <form method="post" action="/listings/<%= listing._id %>?_method=PUT">
+
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" name="listing[title]" value="<%= listing.title %>" /><br>
+
+                <label for="description" class="form-label">Description</label>
+                <textarea name="listing[description]" class="form-control"><%= listing.description %></textarea><br>
+
+                <label for="Image Link/URL" class="form-label">Image Link/URL</label>
+                <input type="text" name="listing[image]" value="<%= listing.image %>" class="form-control" /><br>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="Price" class="form-label">Price</label>
+                        <input type="number" class="form-control" name="listing[price]"
+                            value="<%= listing.price %>" /><br>
+                    </div>
+                    <div class="col-md-8">
+                        <label for="Location" class="form-label">Location</label>
+                        <input type="text" class="form-control" name="listing[location]"
+                            value="<%= listing.location %>" /><br>
+                    </div>
+                </div>
+
+                <label for="Country" class="form-label">Country</label>
+                <input type="text" class="form-control" name="listing[country]" value="<%= listing.country %>" /><br>
+
+
+                <button class="btn btn-danger mb-5">Edit</button>
+            </form>
+
+        </div>
+    </body>
