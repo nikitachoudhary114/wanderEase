@@ -51,7 +51,7 @@ body{
 }
 
 /* card */
-.card{
+.listing-card{
     border: none !important;
     margin-bottom: 2rem;
 }
@@ -78,18 +78,17 @@ body{
     background-color: white;
 }
 
-/* show-page */
+
 .btns{
     display: flex;
 }
-.card img{
-    height: 25rem;
+.card-img{
+    height: 28rem;
+    
     object-fit:unset !important;
 }
-/* review */
-.review-card{
-    border: 1px solid grey;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-   word-wrap: break-word;
+.original-img{
+    height: 13rem;
+    filter: blur(0.7px);
 }
+
