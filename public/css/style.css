@@ -91,4 +91,10 @@ body{
     height: 13rem;
     filter: blur(0.7px);
 }
+#map{
+   height: 50vh;
+   width: 100vh;
+   margin-bottom: 2rem;
+   
+}
 
