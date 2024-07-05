@@ -98,3 +98,32 @@ body{
    
 }
 
+/* filter */
+#filters{
+    margin-top: 1rem;
+    display: flex;
+    line-height: 1.2rem;
+    /* align-items: center; */
+}
+.filter{
+margin: 0.75rem;
+text-align: center;
+opacity: 0.6;
+}
+.filter p{
+    font-size: 0.8rem;
+}
+.filter:hover{
+    opacity: 1;
+}
+.gst{
+    display: none;
+}
+.tax-toggle{
+    border:1px solid gray;
+    padding: 0.6rem;
+    border-radius: 1rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+}

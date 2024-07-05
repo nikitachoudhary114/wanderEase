@@ -12,6 +12,7 @@ const ejsMate = require("ejs-mate");
 const path = require("path");
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
+const mongoStore = require("connect-mongo")
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -25,6 +26,7 @@ const listingRouter = require("./routes/listing")
 const reviewRouter = require("./routes/review");
 const userRouter = require("./routes/user");
 const { getMaxListeners } = require("events");
+const MongoStore = require('connect-mongo');
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -33,6 +35,8 @@ app.use(express.urlencoded({ extended: true }));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+let dbUrl = process.env.ATLAS_DB;
+
 main()
   .then(() => {
     console.log("Connected to DB");
@@ -40,11 +44,24 @@ main()
   .catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/WanderLust_web");
+  await mongoose.connect(dbUrl);
 }
 
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto: {
+    secret: process.env.SECRET
+  },
+  touchAfter: 24 * 3600
+});
+
+store.on("error", () => {
+  console.log("error in MONGO SESSION STORE")
+})
+
 const sessionOptions = {
-  secret: "SecretCode",
+  store,
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -54,9 +71,7 @@ const sessionOptions = {
   }
 };
 
-app.get("/", (req, res) => {
-  res.send("Hi, i am root!");
-});
+
 
 app.use(session(sessionOptions))
 app.use(flash());
