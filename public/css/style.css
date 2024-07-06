@@ -106,7 +106,7 @@ body{
     /* align-items: center; */
 }
 .filter{
-margin: 0.75rem;
+margin-right: 1.5rem;
 text-align: center;
 opacity: 0.6;
 }
@@ -121,7 +121,7 @@ opacity: 0.6;
 }
 .tax-toggle{
     border:1px solid gray;
-    padding: 0.6rem;
+    padding: 1rem;
     border-radius: 1rem;
     height: 3rem;
     display: flex;
